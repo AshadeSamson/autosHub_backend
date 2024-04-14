@@ -1,19 +1,18 @@
 import express, { json } from "express";
 import { PORT } from "./config/config.js";
 import { connectToDatabase } from "./db/mongodb.js";
+import authRouter from "./routes/auth.js";
 
 const app = express()
 connectToDatabase()
 
 // Middlewares
-app.use(express(json()))
+app.use(express.json())
 
 
 // Routes
-app.get("/ah", (req, res) => {
-    res.send("You are welcome to autosHub!")
-    
-})
+app.use("/ah/auth", authRouter)
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
