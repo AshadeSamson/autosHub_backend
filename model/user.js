@@ -1,30 +1,26 @@
 import mongoose from "mongoose";
+import { isEmail } from "validator"
 
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
 
-    firstName:{
-        type: String,
-        required: true
-    },
-    lastName:{
-        type: String,
-        required: true
-    },
     userName:{
         type: String,
-        required: true,
+        required: [true, "Please enter a username"],
         unique: true
     },
     email:{
         type: String,
-        required: true,
-        unique: true
+        required: [true, "Please enter an email address"],
+        unique: true,
+        lowercase: true,
+        validate: [isEmail, "Please enter a valid email"]
     },
     password:{
         type: String,
-        required: true,
+        required: [true, "Please enter a password"],
+        minlength: [6, "Password cannot be less than six (6) characters"],
     }
 
 },{timestamps: true})
