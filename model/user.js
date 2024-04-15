@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-import { isEmail } from "validator"
+import validator from "validator"
 
 const { Schema } = mongoose;
+const { isEmail } = validator
 
 const userSchema = new Schema({
 
