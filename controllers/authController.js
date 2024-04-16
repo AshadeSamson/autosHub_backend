@@ -4,8 +4,9 @@ import { PASS } from "../config/config.js";
 import { authError } from "../error/authError.js";
 
 
+// signup controller
+const signup = async (req, res) => {
 
-const signupPost = async (req, res) => {
     const newUser = new userModel({
         userName: req.body.username,
         email: req.body.email,
@@ -13,19 +14,23 @@ const signupPost = async (req, res) => {
     })
 
     try{
-
         const savedUser = await newUser.save()
         const { password, ...userdetails } = savedUser
         const details = userdetails._doc
         res.status(201).json(details)
-
     } catch(e){
-
         const errors = authError(e)
         res.status(400).json({errors})
-
     }
+}
+
+
+
+// signin controller
+const signin = async (req, res) => {
+
+        console.log("login route working")
 
 }
 
-export { signupPost }
+export { signup, signin }

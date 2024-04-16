@@ -14,6 +14,6 @@ app.use(express.json())
 app.use("/ah/auth", authRouter)
 
 
-app.listen(PORT, () => {
+app.listen(PORT || 5000, () => {
     console.log(`Server running on port ${PORT}`)
 })
