@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import validator from "validator"
+import CryptoJS from "crypto-js";
+import { PASS } from "../config/config.js";
 
 const { Schema } = mongoose;
 const { isEmail } = validator
@@ -25,6 +27,26 @@ const userSchema = new Schema({
     }
 
 },{timestamps: true})
+
+
+
+// static method for user login
+
+userSchema.statics.login = async function(email, password){
+
+    const user = await this.findOne({ email })
+
+    if(user){
+        const originalPassword = CryptoJS.AES.decrypt(user.password, PASS).toString(CryptoJS.enc.Utf8)
+        const inputPassword = password
+
+        if(originalPassword === inputPassword){
+            return user
+        }
+        throw Error("incorrect password")
+    }
+    throw Error("incorrect email")
+}
 
 
 export default mongoose.model("clients", userSchema)
