@@ -11,7 +11,7 @@ export const authError = (err) => {
     }
 
     if (err.code === 11000) {
-        errors = { code: "username or email is already in use"};
+        errors = { error: "username or email is already in use"};
         return errors;
       }
 

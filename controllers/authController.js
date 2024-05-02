@@ -21,7 +21,7 @@ const signup = async (req, res) => {
         
         const token = jwt.sign({ details }, JWT, {expiresIn: "2d"})
         const tokenLS = 1000 * 3 * 24 * 60 * 60
-        res.cookie("auth", token, {httpOnly: true, maxAge: tokenLS, secured: true })
+        res.cookie("auth", token, {httpOnly: true, maxAge: tokenLS})
         res.status(201).json(details)
 
     } catch(e){
@@ -35,22 +35,23 @@ const signup = async (req, res) => {
 // signin controller
 const signin = async (req, res) => {
 
-    const { email, password } = req.body
+    const { email, password: inputPassword } = req.body
 
     try {
-        const user = await userModel.login(email, password)
-        const { passcode, ...userdetails } = user
-        const details = userdetails._doc
+        const user = await userModel.login(email, inputPassword)
+        const { password, ...userdetails } = user._doc
 
-        const token = jwt.sign({ details }, JWT, {expiresIn: "2d"})
+        const token = jwt.sign({ ...userdetails }, JWT, {expiresIn: "2d"})
         const tokenLS = 1000 * 3 * 24 * 60 * 60
-        res.cookie("auth", token, {httpOnly: true, maxAge: tokenLS, secured: true })
-        res.status(200).json(details)
+        res.cookie("auth", token, {httpOnly: true, maxAge: tokenLS  })
+        res.status(200).json({...userdetails})
         
     } catch (e) {
         const errors = authError(e)
         res.status(400).json({errors})
     }
 }
+
+
 
 export { signup, signin }
