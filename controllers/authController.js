@@ -16,13 +16,12 @@ const signup = async (req, res) => {
 
     try{
         const savedUser = await newUser.save()
-        const { password, ...userdetails } = savedUser
-        const details = userdetails._doc
+        const { password, ...userdetails } = savedUser._doc
         
-        const token = jwt.sign({ details }, JWT, {expiresIn: "2d"})
+        const token = jwt.sign({ ...userdetails }, JWT, {expiresIn: "2d"})
         const tokenLS = 1000 * 3 * 24 * 60 * 60
         res.cookie("auth", token, {httpOnly: true, maxAge: tokenLS})
-        res.status(201).json(details)
+        res.status(201).json({ ...userdetails })
 
     } catch(e){
         const errors = authError(e)
