@@ -8,7 +8,7 @@ const { isEmail } = validator
 
 const userSchema = new Schema({
 
-    userName:{
+    username:{
         type: String,
         required: [true, "Please enter a username"],
         unique: true

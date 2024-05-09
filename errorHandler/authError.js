@@ -11,9 +11,9 @@ export const authError = (err) => {
     }
 
     if (err.code === 11000) {
-        errors = { error: "username or email is already in use"};
-        return errors;
-      }
+      errors.username = 'username or email is already in use';
+      errors.email = 'username or email is already in use';
+    }
 
     if (err.message.includes('clients validation failed')) {
         Object.values(err.errors).forEach(({ properties }) => {

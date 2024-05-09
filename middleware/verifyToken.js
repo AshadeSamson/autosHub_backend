@@ -4,15 +4,12 @@ import { JWT } from "../config/config.js"
 export const verifyToken = (req, res, next) => {
 
     const token = req.cookies.auth
-    // const token = req.headers.auth
 
     if(token){
         jwt.verify(token, JWT, (err, decodedToken) => {
             if(err){
                 res.status(403).json("invalid authorization token!")
-                console.log(err.message)
             }else{
-                console.log(decodedToken)
                 next()
             }
 
@@ -20,4 +17,17 @@ export const verifyToken = (req, res, next) => {
     }else{
         res.status(403).json("you are not authenticated!")
     }
+}
+
+
+export const verifyTokenAndAuthorization = (req, res, next) => {
+
+    verifyToken(req, res, () =>{
+        if(req.decodedToken.id === req.params.id){
+            next();
+        }else{
+            res.status(403).json("you are not authorized for that action!")
+        }
+    })
+
 }
