@@ -9,10 +9,9 @@ export const verifyToken = (req, res, next) => {
         jwt.verify(token, JWT, (err, decodedToken) => {
             if(err){
                 res.status(403).json("invalid authorization token!")
-            }else{
-                next()
             }
-
+            req.user = decodedToken
+            next()
         })
     }else{
         res.status(403).json("you are not authenticated!")
@@ -23,7 +22,7 @@ export const verifyToken = (req, res, next) => {
 export const verifyTokenAndAuthorization = (req, res, next) => {
 
     verifyToken(req, res, () =>{
-        if(req.decodedToken.id === req.params.id){
+        if(req.user.id === req.params.id){
             next();
         }else{
             res.status(403).json("you are not authorized for that action!")
