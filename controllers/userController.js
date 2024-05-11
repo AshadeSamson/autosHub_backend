@@ -3,6 +3,8 @@ import CryptoJS from "crypto-js";
 import { PASS } from "../config/config.js";
 
 
+
+// UPDATE USER ACCOUNT
 export const update = async (req, res) => {
 
         // hash user password before update
@@ -23,6 +25,8 @@ export const update = async (req, res) => {
 
 
 
+
+// DELETE USER ACCOUNT
 export const deactivate = async (req, res) => {
 
     try {
