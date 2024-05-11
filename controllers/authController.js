@@ -25,7 +25,7 @@ const signup = async (req, res) => {
 
     } catch(e){
         const errors = authError(e)
-        res.status(400).json({errors})
+        res.status(400).json(e)
     }
 }
 

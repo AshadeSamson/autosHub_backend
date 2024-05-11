@@ -11,17 +11,14 @@ export const update = async (req, res) => {
     }
 
     try {
+
         const updatedUser = await userModel.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true})
         const { password, ...userdetails} = updatedUser._doc
         res.status(200).json({id: userdetails._id, email: userdetails.email, username: userdetails.username})
         
     } catch (error) {
-
         res.status(500).json(error.message)
-        console.log(error)
-        
     }
-
 }
 
 
@@ -29,12 +26,10 @@ export const update = async (req, res) => {
 export const deactivate = async (req, res) => {
 
     try {
-        res.status(200).json("you are about to DELETE your account")
+        await userModel.findByIdAndDelete(req.params.id)
+        res.status(200).json("Your account has been deleted")
         
     } catch (error) {
-
-        res.status(400).json(error.message)
-        
+        res.status(500).json(error.message)
     }
-
 }
