@@ -3,6 +3,7 @@ import { PORT } from "./config/config.js";
 import { connectToDatabase } from "./db/mongodb.js";
 import authRouter from "./routes/auth.js";
 import userRouter from "./routes/user.js";
+import carRouter from "./routes/car.js";
 import cookieParser from "cookie-parser";
 
 const app = express()
@@ -16,6 +17,7 @@ app.use(cookieParser())
 // Routes
 app.use("/ah/auth", authRouter)
 app.use("/ah/user", userRouter)
+app.use("/ah/product", carRouter)
 
 
 app.listen(PORT || 5000, () => {

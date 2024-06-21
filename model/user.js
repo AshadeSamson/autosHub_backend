@@ -24,6 +24,10 @@ const userSchema = new Schema({
         type: String,
         required: [true, "Please enter a password"],
         minlength: [6, "Password cannot be less than six (6) characters"],
+    },
+    isAdmin:{
+        type: Boolean,
+        default: false
     }
 
 },{timestamps: true})
@@ -49,4 +53,4 @@ userSchema.statics.login = async function(email, password){
 }
 
 
-export default mongoose.model("clients", userSchema)
+export default mongoose.model("users", userSchema)

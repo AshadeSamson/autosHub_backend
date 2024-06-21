@@ -19,6 +19,8 @@ export const verifyToken = (req, res, next) => {
 }
 
 
+
+
 export const verifyTokenAndAuthorization = (req, res, next) => {
 
     verifyToken(req, res, () =>{
@@ -29,4 +31,17 @@ export const verifyTokenAndAuthorization = (req, res, next) => {
         }
     })
 
+}
+
+
+
+export const verifyTokenAndAdmin = (req, res, next) => {
+
+    verifyToken(req, res, () => {
+        if(req.user.isAdmin){
+            next()
+        }else{
+            res.status(403).json("forbidden to take that action")
+        }
+    })
 }

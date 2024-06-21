@@ -12,4 +12,4 @@ const orderSchema = new Schema({
     
 }, {timestamps: true})
 
-export default mongoose.model("cart", orderSchema)
+export default mongoose.model("orders", orderSchema)
