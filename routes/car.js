@@ -6,6 +6,6 @@ import { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } from ".
 const carRouter = express.Router()
 
 // ADD A NEW PRODUCT
-carRouter.post("/", verifyTokenAndAdmin, addNewCar)
+carRouter.post("/new", verifyTokenAndAdmin, addNewCar)
 
 export default carRouter;
