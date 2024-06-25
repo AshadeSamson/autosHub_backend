@@ -15,3 +15,29 @@ export const addNewCar = async (req, res) => {
     }
 
 }
+
+
+// UPDATE CAR
+export const updateCar = async (req, res) => {
+
+    try {
+        const updatedCar = await carModel.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true})
+        res.status(201).json(updatedCar);
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+
+}
+
+
+// DELETE CAR
+export const removeCar = async (req, res) => {
+
+    try {
+        await carModel.findByIdAndDelete(req.params.id)
+        res.status(201).json("Car has been deleted from the collection");
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+
+}
