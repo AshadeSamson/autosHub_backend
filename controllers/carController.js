@@ -67,7 +67,18 @@ export const getCar = async (req, res) => {
 export const getAllCars = async (req, res) => {
 
     try {
-        const allCars = await carModel.find({})
+
+        let allCars
+
+        const brand = req.query.brand
+
+        if(brand){
+            allCars = await carModel.find({
+                brand: brand
+            })
+        }else{
+            allCars = await carModel.find({})
+        }
         res.status(201).json(allCars)
     } catch (error) {
         res.status(500).json(error.message)
