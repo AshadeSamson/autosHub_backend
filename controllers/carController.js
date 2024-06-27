@@ -41,3 +41,35 @@ export const removeCar = async (req, res) => {
     }
 
 }
+
+
+
+// GET A CAR 
+export const getCar = async (req, res) => {
+
+    try {
+        const singleCar = await carModel.findById(req.params.id)
+        if(singleCar === null){
+            res.status(404).json("Car not found")
+        }
+        else{
+            res.status(201).json(singleCar)
+        }
+    } catch (error) {
+        res.status(500).json(error.message)
+        
+    }
+}
+
+
+
+// GET ALL CARS
+export const getAllCars = async (req, res) => {
+
+    try {
+        const allCars = await carModel.find({})
+        res.status(201).json(allCars)
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}

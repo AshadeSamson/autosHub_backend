@@ -1,10 +1,18 @@
 import express from "express";
-import { addNewCar, updateCar, removeCar } from "../controllers/carController.js";
+import { addNewCar, updateCar, removeCar, getCar, getAllCars } from "../controllers/carController.js";
 import { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } from "../middleware/verifyToken.js";
 
 
 const carRouter = express.Router()
 
+
+      // GENERAL ROUTES
+
+// GET A CAR
+carRouter.get("/search/:id", getCar)
+
+// GET ALL CARS
+carRouter.get("/cars", getAllCars)
 
 
 
