@@ -22,3 +22,25 @@ export const getUserOrders = async (req, res) => {
         res.status(501).json(error.message)
     }
 }
+
+
+// UPDATE ORDER
+export const updateOrder = async (req, res) => {
+    try {
+        const updatedOrder = await orderModel.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true})
+        res.status(201).json(updatedOrder);
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}
+
+
+// DELETE ORDER
+export const deleteOrder = async (req, res) => {
+    try {
+        await orderModel.findByIdAndDelete(req.params.id)
+        res.status(201).json("Order has been deleted...");
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}
