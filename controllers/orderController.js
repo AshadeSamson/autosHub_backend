@@ -16,7 +16,7 @@ export const newOrder = async (req, res) => {
 // GET USER ORDERS
 export const getUserOrders = async (req, res) => {
     try {
-        const userOrders = await orderModel.find({ userID: req.params.id})
+        const userOrders = await orderModel.find({ userID: req.params.userID})
         res.status(200).json(userOrders)
     } catch (error) {
         res.status(501).json(error.message)

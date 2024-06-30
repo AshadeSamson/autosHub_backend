@@ -6,7 +6,7 @@ import { newOrder, getUserOrders, updateOrder, deleteOrder } from "../controller
 const orderRouter = express.Router()
 
 orderRouter.post("/", verifyToken, newOrder)
-orderRouter.get("/find/:id", verifyTokenAndAuthorization, getUserOrders)
+orderRouter.get("/find/:userID", verifyTokenAndAuthorization, getUserOrders)
 orderRouter.put("/:id", verifyTokenAndAdmin, updateOrder)
 orderRouter.delete("/:id", verifyTokenAndAdmin, deleteOrder)
 
