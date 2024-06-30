@@ -1,4 +1,5 @@
 import express, { json } from "express";
+import cors from "cors"
 import { PORT } from "./config/config.js";
 import { connectToDatabase } from "./db/mongodb.js";
 import authRouter from "./routes/auth.js";
@@ -14,6 +15,7 @@ connectToDatabase()
 // Middlewares
 app.use(express.json())
 app.use(cookieParser())
+app.use(cors())
 
 
 // Routes
