@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "backend application for automobile dealership business",
   "type": "module",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon src/app.js"
   },
   "author": "Ashade Samson",
   "license": "ISC",
